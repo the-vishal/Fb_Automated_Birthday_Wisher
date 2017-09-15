@@ -1,2 +1,3 @@
-# Believers_HACKSPRINT
-UIET DIG HACKSPRINTv2.0 (Automatic Birthday Wisher- FB))
+Automatic Birthday Wisher- FB 
+#(HACKSPRINTv2.0) 
+Team Name - Believers
