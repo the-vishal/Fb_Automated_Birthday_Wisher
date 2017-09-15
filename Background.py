@@ -1,6 +1,6 @@
 #Automatic Birthday wisher on facebook background version i.e
 # not showing window and gui to user.
-
+#One time set up, Paste it into Startup folder.
 import re
 from fbchat import Client
 from fbchat.models import *
