@@ -19,7 +19,7 @@ def user_details():
 
 
 
-
+#Get Current Date
 import datetime
 now= datetime.datetime.now()
 k=now.strftime("%d-%m")
