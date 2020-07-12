@@ -7,6 +7,46 @@ from tkinter import *
 from tkinter import messagebox
 import tkinter as tk
 import datetime
+import sqlite3
+from sqlite3 import Error
+
+
+db_file = "Database.db"
+def create_connection(db_file):
+    """ create a database connection to a SQLite database """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+    except Error as e:
+        print(e)
+
+    return conn
+
+
+def insert_birthday(names, day):
+    
+    """ function to insert new birthdays in the database """
+    conn = create_connection(db_file)
+    with conn:
+	    birthday = (names, day)
+	    sql = ''' INSERT INTO birthdays(name, birthday)VALUES(?,?)'''
+	    cur = conn.cursor()
+	    cur.execute(sql, birthday)
+	    return cur.lastrowid
+
+
+def select_name(date=k):
+
+    """Get name for the date given"""
+    conn = create_connection(db_file)
+    with conn:
+        cur = conn.cursor()
+        cur.execute("SELECT name FROM birthdays WHERE birthday=?",(date,))
+        rows = cur.fetchall()
+
+    for row in rows:
+        print(row[0])
+    return rows
 
 
 def user_details():
@@ -32,13 +72,9 @@ def friend_details():
     global dob
     name=friend.get()
     dob=friend_dob.get()
-    file = open("Database.txt","a")
-
-    file.write( "\n"+ name + ":"+dob)
+    insert_birthday(name, dob)
     print("Entry Added")
-    file.close()
-    file = open("Database.txt", 'r')
-    cont = file.read()
+    cont = select_name(k)
     print(cont)
     pattern = k
     if k in cont:
